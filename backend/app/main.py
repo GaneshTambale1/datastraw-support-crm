@@ -16,17 +16,22 @@ app = FastAPI(
 )
 
 
+origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://miraculous-truth-production-8590.up.railway.app",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "https://miraculous-truth-production-8590.up.railway.app",
-    ],
+    allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
+
+
+print("CORS ORIGINS:", origins)
 
 
 app.include_router(tickets_router)
@@ -45,12 +50,9 @@ def health_check():
         "status": "healthy"
     }
 
+
 @app.get("/debug/cors")
 def debug_cors():
     return {
-        "allowed_origins": [
-            "http://localhost:5173",
-            "http://127.0.0.1:5173",
-            "https://miraculous-truth-production-8590.up.railway.app",
-        ]
+        "allowed_origins": origins
     }
