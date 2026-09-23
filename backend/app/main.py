@@ -43,11 +43,11 @@ def root():
         "message": "Datastraw Support CRM API is running"
     }
 
-
 @app.get("/health")
 def health_check():
     return {
-        "status": "healthy"
+        "status": "healthy",
+        "build": "cors-fix-v1"
     }
 
 
