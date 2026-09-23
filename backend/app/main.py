@@ -44,3 +44,13 @@ def health_check():
     return {
         "status": "healthy"
     }
+
+@app.get("/debug/cors")
+def debug_cors():
+    return {
+        "allowed_origins": [
+            "http://localhost:5173",
+            "http://127.0.0.1:5173",
+            "https://miraculous-truth-production-8590.up.railway.app",
+        ]
+    }
