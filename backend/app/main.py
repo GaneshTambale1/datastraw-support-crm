@@ -8,13 +8,11 @@ from app.core.database import Base, engine
 
 Base.metadata.create_all(bind=engine)
 
-
 app = FastAPI(
     title="Datastraw Support CRM API",
     description="Backend API for the Customer Support Ticketing CRM",
     version="1.0.0",
 )
-
 
 origins = [
     "http://localhost:5173",
@@ -30,10 +28,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-print("CORS ORIGINS:", origins)
-
-
 app.include_router(tickets_router)
 
 
@@ -43,16 +37,9 @@ def root():
         "message": "Datastraw Support CRM API is running"
     }
 
+
 @app.get("/health")
 def health_check():
     return {
-        "status": "healthy",
-        "build": "cors-fix-v1"
-    }
-
-
-@app.get("/debug/cors")
-def debug_cors():
-    return {
-        "allowed_origins": origins
+        "status": "healthy"
     }
